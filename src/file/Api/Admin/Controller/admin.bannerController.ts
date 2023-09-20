@@ -11,19 +11,19 @@ export class AdminBannerController {
 
   @Get()
   @ApiResponse({ status: 200, description: 'Get all banners' })
-  async getAll(): Promise<AdminBannerEntity[]> {
+  async getAll() {
     return this.bannerService.getAllBanners();
   }
 
   @Get(':id')
   @ApiResponse({ status: 200, description: 'Get a banner by ID' })
-  async getOne(@Param('id') id: number): Promise<AdminBannerEntity> {
+  async getOne(@Param('id') id: number) {
     return this.bannerService.getBannerById(id);
   }
 
   @Post()
   @ApiResponse({ status: 201, description: 'Create a new banner' })
-  async create(@Body() createBannerDto: CreateBannerDto): Promise<AdminBannerEntity> {
+  async create(@Body() createBannerDto: CreateBannerDto) {
     return this.bannerService.createBanner(createBannerDto);
   }
 
@@ -31,14 +31,14 @@ export class AdminBannerController {
   @ApiResponse({ status: 200, description: 'Update a banner by ID' })
   async update(
     @Param('id') id: number,
-    @Body() updateBannerDto: UpdateBannerDto,
-  ): Promise<AdminBannerEntity> {
-    return this.bannerService.updateBanner(id, updateBannerDto);
+    @Body() data: UpdateBannerDto,
+  ) {
+    return this.bannerService.updateBanner(id, data);
   }
 
   @Delete()
   @ApiResponse({ status: 200, description: 'Delete one or more banners' })
   async delete(@Body() deleteBannerDto: DeleteBannerDto): Promise<any> {
-    return this.bannerService.deleteBanners(deleteBannerDto.list_id_banner);
+    return this.bannerService.deleteBanners(deleteBannerDto);
   }
 }
