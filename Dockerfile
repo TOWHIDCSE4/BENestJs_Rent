@@ -1,19 +1,13 @@
-FROM node:18-alpine as builder
+FROM node:19-alpine3.16
 
-# ARG SSH_PRIVATE_KEY
-# RUN mkdir /root/.ssh/
-# RUN apk update && apk add git openssh
-# RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
-# RUN chmod 600 /root/.ssh/id_rsa
-# RUN ssh-keyscan github.com > /root/.ssh/known_hosts
+WORKDIR /app
 
-WORKDIR /usr/src/app
-COPY package.json ./
-COPY yarn.lock ./
-RUN yarn
-COPY . ./
-RUN yarn build
+COPY package.json .
 
-EXPOSE 5000
-CMD ["yarn", "start"]
+RUN npm install
 
+COPY . .
+
+EXPOSE 8000
+
+CMD npm run start:dev

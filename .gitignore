@@ -1,4 +1,5 @@
 # compiled output
+/.dbdata
 /dist
 /node_modules
 
