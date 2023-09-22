@@ -11,7 +11,7 @@ export class AdminBannerService {
     ){}
 
     async getAll() {
-        const banners = await this.bannerRepository.find();
+        const banners = await this.bannerRepository.find({});
         return banners;
     }
 }

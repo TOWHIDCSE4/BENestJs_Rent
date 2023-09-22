@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AdminBannerModule } from './admin/banner/admin-banner.module';
+import { DBAdminBanner } from './admin/banner/entity/admin-banner.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,10 @@ import { AdminBannerModule } from './admin/banner/admin-banner.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD || "",
       database: process.env.DB_NAME,
-      entities: [Product],
+      entities: [
+        Product,
+        DBAdminBanner
+      ],
       synchronize: true,
     }),
     ProductsModule,

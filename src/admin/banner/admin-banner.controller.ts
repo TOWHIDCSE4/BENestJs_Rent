@@ -4,6 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { QueryResponseDto } from '../../shared/dto/query-response.dto';
 import { HttpStatus } from "@nestjs/common";
 import { MsgCode } from '../../shared/constants/message.constants';
+import { Response } from 'express';
 
 @ApiTags('Admin Banners')
 @Controller('admin/banners')
@@ -11,11 +12,12 @@ export class AdminBannerController {
     constructor(private readonly bannerService: AdminBannerService){}
 
     @Get()
-    async login(
+    async getAllBanners(
         @Req() request: any,
         @Res() response: Response,
     ): Promise<any> {
         const banners = await this.bannerService.getAll();
-        return new QueryResponseDto(HttpStatus.OK, true, MsgCode.SUCCESS[0], MsgCode.SUCCESS[1], banners);
+        response.status(HttpStatus.OK);
+        return response.json(new QueryResponseDto(HttpStatus.OK, true, MsgCode.SUCCESS[0], MsgCode.SUCCESS[1], banners));
     }
 }
