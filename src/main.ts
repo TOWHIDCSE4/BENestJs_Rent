@@ -6,22 +6,22 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
   app.use(cookieParser());
   app.enableCors({
-    origin: ['http://localhost:3000'],
+    origin: ['https://localhost:3000'],
     credentials: true,
   });
   const config = new DocumentBuilder()
-    .setTitle('Backend Test Api')
-    .setDescription('All the backend services are available')
+    .setTitle('Rental Swagger Apis')
+    .setDescription('All the backend apis are available')
     .setVersion('1.0')
-    .addTag('Backend Ecommerce')
+    .addTag('Swagger Documentation')
     .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  const port = process.env.PORT || 8000;
-
+  const port = process.env.APP_PORT || 8000;
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(port, '0.0.0.0');
 }
 bootstrap();
