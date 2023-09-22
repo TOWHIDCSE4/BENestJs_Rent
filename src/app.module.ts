@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/entties/user.entity';
+import { AdminBannerModule } from './admin/banner/admin-banner.module';
+ 
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { User } from './user/entties/user.entity';
     ProductsModule,
     AuthModule,
     UserModule,
+    AdminBannerModule
   ],
   controllers: [AppController],
   providers: [AppService],
